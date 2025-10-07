@@ -1,6 +1,281 @@
-first page
-second-line
-third-line
-kan
-gut sheik branch 
-nirmal
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Madhu Oru Mental</title>
+
+  <!-- Optional: Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1: #0f172a;
+      --bg2: #0b1020;
+      --accent: #ff6b6b;
+      --muted: rgba(255,255,255,0.85);
+      --glass: rgba(255,255,255,0.06);
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color:var(--muted);
+      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+    }
+
+    /* Make the page occupy full viewport and center content */
+    .stage{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:3rem;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Subtle animated shapes in background */
+    .bg-shape {
+      position:absolute;
+      border-radius:50%;
+      filter: blur(70px);
+      opacity:0.25;
+      transform:translate3d(0,0,0);
+      will-change: transform;
+    }
+    .bg-shape.a{ width:520px; height:520px; background:linear-gradient(45deg,#ff6b6b,#ff9a9a); top:-120px; left:-80px; animation: floatA 14s ease-in-out infinite; }
+    .bg-shape.b{ width:400px; height:400px; background:linear-gradient(45deg,#6b8bff,#7bd3ff); bottom:-100px; right:-60px; animation: floatB 18s ease-in-out infinite; }
+
+    @keyframes floatA{
+      0%{ transform: translateY(0) rotate(0deg) }
+      50%{ transform: translateY(30px) rotate(12deg) }
+      100%{ transform: translateY(0) rotate(0deg) }
+    }
+    @keyframes floatB{
+      0%{ transform: translateY(0) rotate(0deg) }
+      50%{ transform: translateY(-40px) rotate(-8deg) }
+      100%{ transform: translateY(0) rotate(0deg) }
+    }
+
+    /* Card */
+    .card{
+      position:relative;
+      z-index:2;
+      max-width:980px;
+      width:100%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:18px;
+      padding:48px;
+      display:flex;
+      gap:36px;
+      align-items:center;
+      box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .left{
+      flex:1 1 60%;
+    }
+    .right{
+      flex: 0 0 260px;
+      text-align:center;
+    }
+
+    h1{
+      margin:0 0 12px 0;
+      font-weight:800;
+      font-size:clamp(28px,5vw,56px);
+      letter-spacing: -0.02em;
+      color: white;
+      line-height:1;
+    }
+    p.lead{
+      margin:0 0 18px 0;
+      color: rgba(255,255,255,0.85);
+      font-size:clamp(14px,1.6vw,18px);
+      opacity:0.95;
+    }
+
+    .meta{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:14px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      background:var(--glass);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:10px;
+      background: linear-gradient(90deg,var(--accent), #ff9a6b);
+      color:white;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow: 0 6px 18px rgba(255,107,107,0.18);
+      border:none;
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .btn:active{ transform: translateY(1px) }
+
+    .small{
+      display:block;
+      margin-top:14px;
+      font-size:13px;
+      color:rgba(255,255,255,0.75);
+    }
+
+    /* Make right side media look nice */
+    .cover {
+      width:220px;
+      height:220px;
+      border-radius:12px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .cover img{ width:100%; height:100%; object-fit:cover; display:block }
+
+    /* fullscreen helper */
+    .fullscreen-hint{
+      position:fixed;
+      left:12px;
+      bottom:12px;
+      z-index:6;
+      font-size:13px;
+      color:rgba(255,255,255,0.85);
+      display:flex;
+      gap:8px;
+      align-items:center;
+      background:rgba(0,0,0,0.25);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    /* responsive */
+    @media (max-width:880px){
+      .card{ flex-direction:column; padding:28px; gap:18px }
+      .right{ width:100%; text-align:center }
+      .cover{ width:160px; height:160px; margin:0 auto }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="bg-shape a" aria-hidden="true"></div>
+    <div class="bg-shape b" aria-hidden="true"></div>
+
+    <main class="card" role="main">
+      <div class="left">
+        <h1>Madhu — <span style="color:var(--accent)">Oru Mental</span></h1>
+        <p class="lead">A bold, full-screen landing page. Use this as a hero, announcement, or simple promo for Madhu. Replace this text with a description, links, or release notes.</p>
+
+        <div class="meta" role="navigation" aria-label="actions">
+          <button class="btn" id="playBtn" title="Play / Preview">Preview</button>
+          <a class="btn" id="openBtn" href="#" title="Open details" style="background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); box-shadow:none;">Details</a>
+
+          <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+            <span class="pill">v1.0</span>
+            <span class="pill">Full screen</span>
+          </div>
+        </div>
+
+        <span class="small">Tip: Press the top-right browser menu and select "Enter Full Screen" for immersive view.</span>
+      </div>
+
+      <aside class="right" aria-label="cover">
+        <div class="cover" id="cover">
+          <!-- Replace with any image URL if you want -->
+          <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Cover image">
+        </div>
+        <div style="margin-top:12px">
+          <button class="btn" id="toggleTheme">Toggle Theme</button>
+        </div>
+      </aside>
+    </main>
+
+    <div class="fullscreen-hint" id="fsHint">Press F11 for full screen</div>
+  </div>
+
+  <script>
+    // Basic interactivity: Preview button toggles a quick animation
+    const playBtn = document.getElementById('playBtn');
+    const cover = document.getElementById('cover');
+    const fsHint = document.getElementById('fsHint');
+    const stage = document.getElementById('stage');
+    const toggleTheme = document.getElementById('toggleTheme');
+
+    playBtn.addEventListener('click', () => {
+      cover.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(1.04)' },
+        { transform: 'scale(1)' }
+      ], {
+        duration: 700,
+        easing: 'ease-in-out'
+      });
+    });
+
+    // Simple theme toggle (light/dark)
+    let dark = true;
+    toggleTheme.addEventListener('click', () => {
+      dark = !dark;
+      if(!dark){
+        document.documentElement.style.setProperty('--bg1', '#f8fafc');
+        document.documentElement.style.setProperty('--bg2', '#eef2ff');
+        document.documentElement.style.setProperty('--muted', '#0b1020');
+        document.documentElement.style.setProperty('--glass', 'rgba(11,16,32,0.04)');
+      } else {
+        document.documentElement.style.setProperty('--bg1', '#0f172a');
+        document.documentElement.style.setProperty('--bg2', '#0b1020');
+        document.documentElement.style.setProperty('--muted', 'rgba(255,255,255,0.85)');
+        document.documentElement.style.setProperty('--glass', 'rgba(255,255,255,0.06)');
+      }
+    });
+
+    // Try to request fullscreen when user clicks Details (example)
+    document.getElementById('openBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+        fsHint.textContent = 'Exited full screen';
+      } else {
+        stage.requestFullscreen?.().then(() => {
+          fsHint.textContent = 'In full screen — press Esc to exit';
+        }).catch(() => {
+          fsHint.textContent = 'Full screen not permitted';
+        });
+      }
+    });
+
+    // Small helper: show F11 hint then fade
+    setTimeout(()=> {
+      fsHint.style.transition = 'opacity .8s ease';
+      fsHint.style.opacity = '0.9';
+    }, 400);
+    setTimeout(()=> {
+      fsHint.style.opacity = '0.0';
+    }, 7000);
+  </script>
+</body>
+</html>
+
